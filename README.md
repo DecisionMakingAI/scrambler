@@ -1,2 +1,1 @@
-# scrambler
-AI RC Car Platform
+scrambler robot
