@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Test Voltage Regulator - Scrambler</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Test Voltage Regulator";
+    var mkdocs_page_input_path = "finalassy/testvoltageregulator.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="icon icon-home"> Scrambler</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../index.html">Introduction</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../initialsetup.html">Initial Setup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Final Assembly</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="introduction.html">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="batteryprep.html">Battery Prep</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="drivebattery.html">Install Drive Battery</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="processorbattery.html">Install Processor Battery</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="testvoltageregulator.html">Test Voltage Regulator</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#voltage-regulator">Voltage Regulator</a></li>
+    
+
+    <li class="toctree-l3"><a href="#testing">Testing</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="cameramount.html">Camera Mount</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="rollbarassembly.html">Roll Bar Assembly</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="finalhookup.html">Final Hook Up</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../powermonitor.html">Power Monitoring</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chargingbatteries.html">Charging Batteries</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../headless_setup.html">Headless Setup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../generalnotes.html">General Operating Notes</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Hardware Assembly</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../hwassy/introduction.html">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwassy/cableprep.html">Cable Preparation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwassy/hwassy.html">Hardware Assembly</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../setup_jetson_nano.html">Software Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../sd_card_backup.html">Software Backup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Hardware Design Notes</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../hwdesign/enhancements.html">Enhancements</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwdesign/powerdesign.html">Power Design</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwdesign/wiremanagement.html">Wire Management</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwdesign/mountingparts.html">Mounting Parts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwdesign/cameramount.html">Camera Mount</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Software Design Notes</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../swdesign/workenv.html">Work Environment</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/hotspot.html">Hotspot Setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/camera.html">Pi Camera Usage</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/webstream.html">Simple Web Streamer</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/sysmon.html">System Monitor</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/joystick.html">Joystick Testing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/camera_cal.html">Camera Calibration</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/gstreamer.html">GSTREAMER Python Bindings</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Scrambler</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Final Assembly &raquo;</li>
+        
+      
+    
+    <li>Test Voltage Regulator</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="voltage-regulator">Voltage Regulator</h2>
+<p>The voltage regulator takes the processor battery input (nominally 11.1V), drops it down to 5V for drive the processor.
+This is a high efficiency convertor (around 98%) so minimal power is lost during this process.</p>
+<h2 id="testing">Testing</h2>
+<p>The regulator has been adjusted to appropriate levels before shipping.
+This test uses the display readout to check the output voltage level.
+This check is to insure proper levels after shipping before before applying power to the processor.</p>
+<ul>
+<li>Unplug 5V power cable on the processor (should already be unplugged).</li>
+<li>Turn on computer power switch on the processor panel.</li>
+<li>With regulator control buttons, select the display of the output voltage.<ul>
+<li>Repeatedly press SET button until F-0 mode appears on display</li>
+<li>Press ENT button</li>
+</ul>
+</li>
+</ul>
+<div style="text-align:center"><img src="fa_img/ProcessorBatteryTest1.jpg" /></div>
+
+<p><br></p>
+<ul>
+<li>The display should read between 5.2 and 5.4 volts.</li>
+<li>If not, with a small screw driver, adjust the V control under the display until the reading is within this range.</li>
+<li>Set the readout back to displaying input voltage.<ul>
+<li>Repeatedly press SET button until F-1 mode appears on display</li>
+<li>Press ENT button</li>
+</ul>
+</li>
+<li>Turn off the power switch.</li>
+<li>Plug the power cable back into the processor.</li>
+</ul>
+<div style="text-align:center"><img src="fa_img/ProcessorBatteryTest1.jpg" /></div>
+
+<p><br></p>
+<p>Should a full calibration of the regulator be required, refer to the <a href="../reference/Drok-180078.pdf">Drok Calibration Sheet</a> for full details.
+This will require a DMM with current measuring capability along with a resistive power load.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="cameramount.html" class="btn btn-neutral float-right" title="Camera Mount">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="processorbattery.html" class="btn btn-neutral" title="Install Processor Battery"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="processorbattery.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="cameramount.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

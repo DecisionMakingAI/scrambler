@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Pi Camera Usage - Scrambler</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Pi Camera Usage";
+    var mkdocs_page_input_path = "swdesign/camera.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="icon icon-home"> Scrambler</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../index.html">Introduction</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../initialsetup.html">Initial Setup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Final Assembly</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../finalassy/introduction.html">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/batteryprep.html">Battery Prep</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/drivebattery.html">Install Drive Battery</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/processorbattery.html">Install Processor Battery</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/testvoltageregulator.html">Test Voltage Regulator</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/cameramount.html">Camera Mount</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/rollbarassembly.html">Roll Bar Assembly</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/finalhookup.html">Final Hook Up</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../powermonitor.html">Power Monitoring</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chargingbatteries.html">Charging Batteries</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../headless_setup.html">Headless Setup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../generalnotes.html">General Operating Notes</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Hardware Assembly</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../hwassy/introduction.html">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwassy/cableprep.html">Cable Preparation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwassy/hwassy.html">Hardware Assembly</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../setup_jetson_nano.html">Software Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../sd_card_backup.html">Software Backup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Hardware Design Notes</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../hwdesign/enhancements.html">Enhancements</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwdesign/powerdesign.html">Power Design</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwdesign/wiremanagement.html">Wire Management</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwdesign/mountingparts.html">Mounting Parts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwdesign/cameramount.html">Camera Mount</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Software Design Notes</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="workenv.html">Work Environment</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="hotspot.html">Hotspot Setup</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="camera.html">Pi Camera Usage</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#camera-gstreamer-and-the-display-variable">Camera, GSTREAMER and the DISPLAY Variable</a></li>
+    
+
+    <li class="toctree-l3"><a href="#video-test-pattern-operation">Video Test Pattern Operation</a></li>
+    
+
+    <li class="toctree-l3"><a href="#camera-streams-run-local-display-only">Camera Streams Run Local Display Only</a></li>
+    
+
+    <li class="toctree-l3"><a href="#fix-for-remote-display-operation">Fix for Remote Display Operation</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="webstream.html">Simple Web Streamer</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="sysmon.html">System Monitor</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="joystick.html">Joystick Testing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="camera_cal.html">Camera Calibration</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="gstreamer.html">GSTREAMER Python Bindings</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Scrambler</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Software Design Notes &raquo;</li>
+        
+      
+    
+    <li>Pi Camera Usage</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="camera-gstreamer-and-the-display-variable">Camera, GSTREAMER and the DISPLAY Variable</h2>
+<p>The Pi Camera is connected through the CSI port on the Jetson Nano.
+This port is operated through the GSTREAMER interface.
+While this interface provides a lot of useful features, it is very finicky and makes some operations like displaying camera output on a remote host difficult.
+<a href="https://docs.nvidia.com/jetson/l4t/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/accelerated_gstreamer.html">NVIDIA Jetson Linux Driver Package Software Features</a> and the <a href="https://developer.download.nvidia.com/embedded/L4T/r32_Release_v1.0/Docs/Accelerated_GStreamer_User_Guide.pdf?etbrIkKqc4UgPblFYNY4UwC_wBbLYkp5edOoRObRexGdgneeX6irzFsKiCbI91CqaxYw7yb1g_NaYOlO6L1h-nbaH7Y_QFM2-ZuK8ApcPcf53QkVRBTlBBrHa1BIw4gibQsbPIti0BOLTSqSrTCuIHU-Wb2uOrBGABFVj8fY_q8YrX50FBc">Accelerated GSTREAMER User Guide</a> describe much about the jetson nano with numerous GSTREAMER examples.</p>
+<p>One big issue for the linux/X11 environment is the setting of the DISPLAY variable.
+When a local display is attached, the DISPLAY variable is usually something like:</p>
+<pre><code class="text">    DISPLAY=:0
+</code></pre>
+
+<p>The DISPLAY variable is also undefined when a simple remote login occurs:</p>
+<pre><code class="bash">    ssh donkey@scrambler.local
+</code></pre>
+
+<p>In both these situations, connecting to the camera works fine.</p>
+<p>If you would like to simply send video to a remote display, or open X Windows on a remote host as in a headless situation, you might login to the Jetson Nano via:</p>
+<pre><code class="bash">    ssh -X donkey@scrambler.local
+</code></pre>
+
+<p>In this case, the DISPLAY variable is set to something like:</p>
+<pre><code class="text">    DISPLAY=localhost:10.0
+</code></pre>
+
+<p>and the camera connection cannot be established.
+It is just the camera connection that breaks.
+Other GSTREAMER sources, such as the video test signal generator continue to work just fine, although the sink element in the stream may need to be modified.</p>
+<h2 id="video-test-pattern-operation">Video Test Pattern Operation</h2>
+<p>To illustrate this, the following test signal script works on the local and remote display environments.</p>
+<pre><code class="bash">gst-launch-1.0 videotestsrc pattern=smpte ! \
+        'video/x-raw, width=(int)640, height=(int)480, \
+        framerate=(fraction)20/1' ! \
+        xvimagesink -e
+</code></pre>
+
+<p>It produces the following display:</p>
+<div style="text-align:center"><img src="sw_img/ColorBarTestPattern.png" width="360" /></div>
+
+<p><br></p>
+<p>The noise pattern in the lower portion of the screen updates at normal speeds on the local display, but is very slow on the remote display, illustrating bandwidth limitations over WiFi.
+In fact, a warning is issued about the speed of the computer.</p>
+<h2 id="camera-streams-run-local-display-only">Camera Streams Run Local Display Only</h2>
+<p>When replacing the test signal generator with the camera, everything continues to run fine on the local display, but fails on the remote display.</p>
+<pre><code class="bash">gst-launch-1.0 nvarguscamerasrc ! \
+        'video/x-raw(memory:NVMM), width=(int)640, height=(int)480, \
+        format=(string)NV12, framerate=(fraction)20/1' ! \
+        nvvidconv flip-method=2 ! \
+        xvimagesink -e
+</code></pre>
+
+<div style="text-align:center"><img src="sw_img/CameraTest_Cats.png" width="360" /></div>
+
+<p><br></p>
+<h2 id="fix-for-remote-display-operation">Fix for Remote Display Operation</h2>
+<p>One way to work around this problem is to modify the DISPLAY variable before instantiating the camera through the GSTREAMER.
+This can easily be done in python using opencv.
+The following code illustrates this.</p>
+<pre><code class="python">import os
+import cv2
+
+# Work around DISPLAY issues
+disp = os.environ[&quot;DISPLAY&quot;]
+os.environ[&quot;DISPLAY&quot;] = ':0'
+
+# Set video size information
+width = 640
+height = 480
+fps = 10
+
+# Create a VideoCapture object
+gst_str = ('nvarguscamerasrc ! '
+    'video/x-raw(memory:NVMM), '
+    'width=(int)1280, height=(int)720, '
+    'format=(string)NV12, framerate=(fraction)%d/1 ! '
+    'nvvidconv flip-method=2 ! '
+    'video/x-raw, '
+    'width=(int)%d, height=(int)%d, format=(string)BGRx ! '
+    'videoconvert ! '
+    'appsink' % (fps, width, height))
+
+cap = cv2.VideoCapture(gst_str, cv2.CAP_GSTREAMER)
+
+# Check if camera opened successfully
+if (cap.isOpened() == False):
+  print(&quot;Unable to read camera feed&quot;)
+
+# Put back the display environment
+os.environ[&quot;DISPLAY&quot;] = disp
+
+winName = &quot;CameraWin&quot;
+cv2.namedWindow(winName, cv2.WINDOW_NORMAL)
+cv2.resizeWindow(winName, width, height)
+cv2.setWindowTitle(winName, &quot;Preview&quot;)
+
+while(True):
+  ret, frame = cap.read()
+
+  if ret == True:
+
+    # Display the resulting frame    
+    cv2.imshow(winName, frame)
+
+    # Press q on keyboard exit
+    key = cv2.waitKey(1) &amp; 0xFF
+    if key == ord('q'):         #focus must be in the display window to work
+      break
+    if cv2.getWindowProperty(winName, 0) &lt; 0: #see if user closed the window
+        break
+
+  # Break the loop
+  else:
+    break
+
+# When everything done, release the video capture object
+cap.release()
+
+# Closes all the frames
+cv2.destroyAllWindows()
+</code></pre>
+
+<p>This now handles remote displays, however, transmitting raw video over WiFi is slow.
+Compressing video before tranmission, should give the necessary improvements.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="webstream.html" class="btn btn-neutral float-right" title="Simple Web Streamer">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="hotspot.html" class="btn btn-neutral" title="Hotspot Setup"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="hotspot.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="webstream.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>
