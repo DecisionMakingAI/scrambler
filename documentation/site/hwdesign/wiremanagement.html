@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Wire Management - Scrambler</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Wire Management";
+    var mkdocs_page_input_path = "hwdesign/wiremanagement.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="icon icon-home"> Scrambler</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../index.html">Introduction</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../initialsetup.html">Initial Setup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Final Assembly</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../finalassy/introduction.html">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/batteryprep.html">Battery Prep</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/drivebattery.html">Install Drive Battery</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/processorbattery.html">Install Processor Battery</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/testvoltageregulator.html">Test Voltage Regulator</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/cameramount.html">Camera Mount</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/rollbarassembly.html">Roll Bar Assembly</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../finalassy/finalhookup.html">Final Hook Up</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../powermonitor.html">Power Monitoring</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../chargingbatteries.html">Charging Batteries</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../headless_setup.html">Headless Setup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../generalnotes.html">General Operating Notes</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Hardware Assembly</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../hwassy/introduction.html">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwassy/cableprep.html">Cable Preparation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../hwassy/hwassy.html">Hardware Assembly</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../setup_jetson_nano.html">Software Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../sd_card_backup.html">Software Backup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Hardware Design Notes</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="enhancements.html">Enhancements</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="powerdesign.html">Power Design</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="wiremanagement.html">Wire Management</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#issues">Issues</a></li>
+    
+
+    <li class="toctree-l3"><a href="#battery-wires-and-connectors">Battery Wires and Connectors</a></li>
+    
+
+    <li class="toctree-l3"><a href="#computer-current-draw">Computer Current Draw</a></li>
+    
+
+    <li class="toctree-l3"><a href="#drive-system-current-draw">Drive System Current Draw</a></li>
+    
+
+    <li class="toctree-l3"><a href="#power-regulator-connections">Power Regulator Connections</a></li>
+    
+
+    <li class="toctree-l3"><a href="#connecting-the-elements">Connecting the Elements</a></li>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="mountingparts.html">Mounting Parts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="cameramount.html">Camera Mount</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Software Design Notes</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../swdesign/workenv.html">Work Environment</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/hotspot.html">Hotspot Setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/camera.html">Pi Camera Usage</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/webstream.html">Simple Web Streamer</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/sysmon.html">System Monitor</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/joystick.html">Joystick Testing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/camera_cal.html">Camera Calibration</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../swdesign/gstreamer.html">GSTREAMER Python Bindings</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Scrambler</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Hardware Design Notes &raquo;</li>
+        
+      
+    
+    <li>Wire Management</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="issues">Issues</h1>
+<p>The batteries are capable of producing high currents and thus have large diameter wires.
+The space in which to connect and route wires is rather limited.
+These wires need to be routed through switches and connected to power regulators and voltmeters.
+These devices don't all handle the large wire sizes very well.
+In order to make changes or repairs to the car, as much as possible, pluggable connections will be used.
+To disassemble the car, we'd like to avoid having to get out a soldering iron.</p>
+<h1 id="battery-wires-and-connectors">Battery Wires and Connectors</h1>
+<p>The LiPo batteries come with XT60 connectors with 12AWG silicon wire.
+The silicon wire is fortunately very flexable, but still occuppies a fair amount of space.</p>
+<div style="text-align:center"><img src="des_img/XT60Cable.jpg" /></div>
+
+<p>The following table lists the specifications for the batteries used.</p>
+<table>
+<thead>
+<tr>
+<th>Battery</th>
+<th>Capacity (Ah)</th>
+<th>Discharge Rating<br>(cont-peak C)</th>
+<th>Cell Count / Voltage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Computer</td>
+<td>3</td>
+<td>20C-30C</td>
+<td>3 / 11.1V</td>
+</tr>
+<tr>
+<td>Drive System</td>
+<td>1.8</td>
+<td>20-30C</td>
+<td>2 / 7.4V</td>
+</tr>
+</tbody>
+</table>
+<p>The safe discharge current is the product of the discharge rating and the battery capacity.
+For the cmputer battery that is 3A * 20 or 60A.
+The peak discharge current is 90A.
+The battery uses the XT60 connector which is rated at 60A and has a peak current rating of much higher.
+Similarly the drive system battery is capable of producing a discharge current of 36A.</p>
+<p>General wire parameters are listed in the following table for various wire sizes.</p>
+<table>
+<thead>
+<tr>
+<th>Gauge<br>(AWG)</th>
+<th>Diameter</th>
+<th>Resistance<br>(per km)</th>
+<th>Max Current<br>(In Jacket)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10</td>
+<td>2.5883mm</td>
+<td>3.28Ω</td>
+<td>15A</td>
+</tr>
+<tr>
+<td>12</td>
+<td>2.0523mm</td>
+<td>5.21Ω</td>
+<td>9.3A</td>
+</tr>
+<tr>
+<td>14</td>
+<td>1.6281mm</td>
+<td>8.28Ω</td>
+<td>5.9A</td>
+</tr>
+<tr>
+<td>16</td>
+<td>1.2903mm</td>
+<td>13.17Ω</td>
+<td>3.7A</td>
+</tr>
+<tr>
+<td>18</td>
+<td>1.0236mm</td>
+<td>20.94Ω</td>
+<td>2.3A</td>
+</tr>
+<tr>
+<td>20</td>
+<td>0.8128mm</td>
+<td>33.29Ω</td>
+<td>1.5A</td>
+</tr>
+<tr>
+<td>22</td>
+<td>0.6452mm</td>
+<td>52.94Ω</td>
+<td>0.92A</td>
+</tr>
+<tr>
+<td>24</td>
+<td>0.5105mm</td>
+<td>84.20Ω</td>
+<td>0.577A</td>
+</tr>
+</tbody>
+</table>
+<p>The maximum current capacity is determined from the maximum allowed temperature increase in the wire (as well as a few other parameters).
+The silicon coated wire in the battery cable, can withstand a much higher temperature increase than more traditional wire coatings so 12AWG will handle the necessary currents from the battery.</p>
+<h1 id="computer-current-draw">Computer Current Draw</h1>
+<p>The external power supply must be able to supply 4A at 5V.
+This is far lower than the capability of the LiPo battery, so wmaller wire sizes can be employed after the battery cable.</p>
+<p>Care needs to be taken when buying barrel jacks with pigtails already on them.
+There are two varieties, both listed for powering devices.
+One comes with 18AWG wire and the other with 22AWG wire.
+The 22AWG wire gets hot under a 3A load and drops substantial voltage, not good for input to the processor.</p>
+<h1 id="drive-system-current-draw">Drive System Current Draw</h1>
+<p>The ESC in connected with much smaller wires than the battery.  It also uses a min-Tamiya connector as well.</p>
+<p>The min-Tamiya connector has 10A rating, which is much below the battery output capability.
+The wire size appears to be around 18AWG as well.
+The NiMH battery that came with the car is rated at 1100mAh.
+Using the 2 to 3C discharge rate of 2-3C for NiMH, then we can expect around a 3A max draw from the battery.</p>
+<h1 id="power-regulator-connections">Power Regulator Connections</h1>
+<p>In early testing, it was difficult to keep the stranded wires tight in the screw terminals on the board.
+Since there is a very tight space it could be difficult to achieve a reliable connection and it the wire works loose, it given the power in the battery, this could cause serious problems.
+Using ferrules on the ends of the wires elminates this problem.
+In doing this, the maximum wire size that will fit in the connector is 18AWG.
+For the current that will be passing through this device, this is sufficient since the wire lengths are all relatively short.</p>
+<h1 id="connecting-the-elements">Connecting the Elements</h1>
+<p>Since the maximum commputer and drive system current draws are much less than the battery capability, we can use smaller wire sizes and lower power components fit the space requirements.</p>
+<p>A convenient and inexpensive rocker power switch with a 20A current rating is more than ample.</p>
+<p>Where possible, crimp connectors will be used, so that things can just get plugged and unplugged as necessary.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="mountingparts.html" class="btn btn-neutral float-right" title="Mounting Parts">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="powerdesign.html" class="btn btn-neutral" title="Power Design"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="powerdesign.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="mountingparts.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
+</html>

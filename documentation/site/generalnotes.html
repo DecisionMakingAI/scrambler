@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>General Operating Notes - Scrambler</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "General Operating Notes";
+    var mkdocs_page_input_path = "generalnotes.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> Scrambler</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="index.html">Introduction</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="initialsetup.html">Initial Setup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Final Assembly</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="finalassy/introduction.html">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="finalassy/batteryprep.html">Battery Prep</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="finalassy/drivebattery.html">Install Drive Battery</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="finalassy/processorbattery.html">Install Processor Battery</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="finalassy/testvoltageregulator.html">Test Voltage Regulator</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="finalassy/cameramount.html">Camera Mount</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="finalassy/rollbarassembly.html">Roll Bar Assembly</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="finalassy/finalhookup.html">Final Hook Up</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="powermonitor.html">Power Monitoring</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="chargingbatteries.html">Charging Batteries</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="headless_setup.html">Headless Setup</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="generalnotes.html">General Operating Notes</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#processor-power-current-limiting">Processor Power Current Limiting</a></li>
+    
+
+    <li class="toctree-l2"><a href="#output-voltage-increases-with-processor-load">Output Voltage Increases with Processor Load</a></li>
+    
+
+    <li class="toctree-l2"><a href="#car-suspension">Car Suspension</a></li>
+    
+
+    <li class="toctree-l2"><a href="#using-jetson-nano-serial-ports">Using Jetson Nano Serial Ports</a></li>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Hardware Assembly</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="hwassy/introduction.html">Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="hwassy/cableprep.html">Cable Preparation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="hwassy/hwassy.html">Hardware Assembly</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="setup_jetson_nano.html">Software Installation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="sd_card_backup.html">Software Backup</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Hardware Design Notes</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="hwdesign/enhancements.html">Enhancements</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="hwdesign/powerdesign.html">Power Design</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="hwdesign/wiremanagement.html">Wire Management</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="hwdesign/mountingparts.html">Mounting Parts</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="hwdesign/cameramount.html">Camera Mount</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Software Design Notes</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="swdesign/workenv.html">Work Environment</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="swdesign/hotspot.html">Hotspot Setup</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="swdesign/camera.html">Pi Camera Usage</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="swdesign/webstream.html">Simple Web Streamer</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="swdesign/sysmon.html">System Monitor</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="swdesign/joystick.html">Joystick Testing</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="swdesign/camera_cal.html">Camera Calibration</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="swdesign/gstreamer.html">GSTREAMER Python Bindings</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Scrambler</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>General Operating Notes</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>This section lists some general things that may be observed through operation.</p>
+<h1 id="processor-power-current-limiting">Processor Power Current Limiting</h1>
+<p>If the orange light comes on on the processor panel, the regulator has gone into current limit mode.
+This light can be seen through the rectangular hole on the processor panel near the V adjustment area.
+This should not happen under normal operation.
+Causes of this are a short in the output, processor is drawing more power than regulator can output or the I-adjust control is set too low.
+If the regulator current limits excessively, it can cause a brown-out on the processor and force it to reset.</p>
+<p>To increase the current level output, turn the I-adjust control clockwise.</p>
+<p>If adding electrical components to the car, it is important to note that the regulator has a current sense resistor on the ground side of the system.
+Thus, the negative side of the battery is not at the same level as the 5V ground to the processor.
+The drive system battery and the 5V ground end up at the same level through the wiring of the PWM module.
+Should the processor battery negative lead be brought to the same level as the 5V ground, this will effectively short out the sensing resistor and damage to the regulator will result.</p>
+<h1 id="output-voltage-increases-with-processor-load">Output Voltage Increases with Processor Load</h1>
+<p>If you observing the ouput voltage on the display, you may notice that it may increase as much as 0.2V as the processor pulls a heavy load.
+This is normal because of the sense resistor in the ground path on the regulator.
+The actual input voltage remains at the unloaded reading value.</p>
+<h1 id="car-suspension">Car Suspension</h1>
+<p>Adding the processor battery, 3D printed parts and other electronics increases the weight of the car by about 650g (23 oz).
+If the suspension appears to be sagging too much, go to the <a href="http://www.exceedrc.com">Exceed RC</a> web-site for instructional videos on changing shock oil and adjusting spring tension.</p>
+<h1 id="using-jetson-nano-serial-ports">Using Jetson Nano Serial Ports</h1>
+<p>There may be times that it is useful to connect to a serial console port to gain control of the system.
+There are two serial UART ports on the Jetson Nano.
+The port on J44 is the system serial console port.
+The other serial port is on J41.
+This port is mixed in with other I/O pins.
+Many users report having difficulty in connecting to the serial port on J41.
+There seems to be little information on the web to help resolve this issue.
+The version of firmware downloaded for this car also exhibits this problem.
+For purposes of getting things up and running, only J44 will be used.</p>
+<p>A nice tutorial by <a href="https://www.jetsonhacks.com/2019/04/19/jetson-nano-serial-console">JetsonHacks</a> covers many elements of getting connected to the serial console. </p>
+<p>USB to TTL Cables are available from several sources.
+<a href="https://amazon.com/gp/product/B07D9R5JFK/ref=ppx_yo_dt_b_asin_image_o02_s00?ie=UTF8&amp;psc=1">This</a> one is readily available.
+The cable is not all that long, so to make connections easier, it may be necessary to attach this cable to the host through a USB extension cable.</p>
+<div style="text-align:center"><img src="img/USBtoSerial.jpg" width="360" /></div>
+
+<p><br></p>
+<p>The serial device is connected to the J44 on the Jetson Nano as follows:</p>
+<table>
+<thead>
+<tr>
+<th>J44 Pin</th>
+<th>Cable Wire</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2 (TXD)</td>
+<td>White (RXD)</td>
+</tr>
+<tr>
+<td>3 (RXD)</td>
+<td>Green (TXD)</td>
+</tr>
+<tr>
+<td>6 (GND)</td>
+<td>Black (GND)</td>
+</tr>
+<tr>
+<td>NC</td>
+<td>Red (5V)</td>
+</tr>
+</tbody>
+</table>
+<p>The J44 port runs at logic levels of 3.3V and is not 5V compatible.
+The red lead on the USB to TTL device is a 5V source and is not needed and must not be connected to pins on J44.</p>
+<p>Note: RXD on the cable is connected to TXD on the Nano and vice versa.
+This has to do with labeling conventions.</p>
+<p>The following picture shows the connection of this device.
+Also note that the 5V lead is taped up out of the way so that it cannot inadvertantly short to anything on the board.</p>
+<div style="text-align:center"><img src="img/USBtoJ44.jpg" /></div>
+
+<p><br></p>
+<p>There are many serial terminal emulators available.
+The example here will use <em>screen</em>.</p>
+<p>If not already installed on the host, it can be simply done via:</p>
+<pre><code>sudo apt-get update
+sudo apt-get install screen
+</code></pre>
+
+<p>To discover which port the USB to TTL convertor is plugged into, open a terminal window and type the following command:</p>
+<pre><code>dmesg --follow
+</code></pre>
+
+<p>Then plug the USB device in and observe the output of dmesg.
+It will typically show that the device is connected to a port such as <em>ttyUSB0</em>.</p>
+<p>Exit out of the <em>dmesg</em> command.</p>
+<p>Start up the terminal emulator with the command:</p>
+<pre><code>screen /dev/*&lt;device&gt;* 115200
+</code></pre>
+
+<p>You should now be able to login to the machine.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="hwassy/introduction.html" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="headless_setup.html" class="btn btn-neutral" title="Headless Setup"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="headless_setup.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="hwassy/introduction.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+
+</body>
+</html>

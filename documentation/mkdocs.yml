@@ -1,0 +1,43 @@
+site_name: Scrambler
+use_directory_urls: false
+theme: readthedocs
+extra_css:
+  - extra.css
+nav:
+    - Introduction: index.md
+    - Initial Setup: initialsetup.md
+    - Final Assembly:
+        - 'Introduction': finalassy/introduction.md
+        - 'Battery Prep': finalassy/batteryprep.md
+        - 'Install Drive Battery': finalassy/drivebattery.md
+        - 'Install Processor Battery': finalassy/processorbattery.md
+        - 'Test Voltage Regulator': finalassy/testvoltageregulator.md
+        - 'Camera Mount': finalassy/cameramount.md
+        - 'Roll Bar Assembly': finalassy/rollbarassembly.md
+        - 'Final Hook Up': finalassy/finalhookup.md
+    - Power Monitoring: powermonitor.md
+    - Charging Batteries: chargingbatteries.md
+    - Headless Setup: headless_setup.md
+    - General Operating Notes: generalnotes.md
+    - Hardware Assembly:
+        - 'Introduction': hwassy/introduction.md
+        - 'Cable Preparation': hwassy/cableprep.md
+        - 'Hardware Assembly': hwassy/hwassy.md
+    - Software Installation: setup_jetson_nano.md
+    - Software Backup: sd_card_backup.md
+    - Hardware Design Notes:
+        - 'Enhancements': hwdesign/enhancements.md
+        - 'Power Design': hwdesign/powerdesign.md
+        - 'Wire Management': hwdesign/wiremanagement.md
+        - 'Mounting Parts': hwdesign/mountingparts.md
+        - 'Camera Mount': hwdesign/cameramount.md
+    - Software Design Notes:
+        - 'Work Environment': swdesign/workenv.md
+        - 'Hotspot Setup': swdesign/hotspot.md
+        - 'Pi Camera Usage': swdesign/camera.md
+        - 'Simple Web Streamer': swdesign/webstream.md
+        - 'System Monitor': swdesign/sysmon.md
+        - 'Joystick Testing': swdesign/joystick.md
+        - 'Camera Calibration': swdesign/camera_cal.md
+        - 'GSTREAMER Python Bindings': swdesign/gstreamer.md
+
