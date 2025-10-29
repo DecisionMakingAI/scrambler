@@ -19,6 +19,7 @@ nav:
     - Charging Batteries: chargingbatteries.md
     - Headless Setup: headless_setup.md
     - General Operating Notes: generalnotes.md
+    - How to Run / Duplicate the Project: how_to_run.html ## added ##
     - Hardware Assembly:
         - 'Introduction': hwassy/introduction.md
         - 'Cable Preparation': hwassy/cableprep.md
