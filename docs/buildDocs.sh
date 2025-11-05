@@ -46,6 +46,9 @@ docroot=`mktemp -d`
 rsync -av "docs/_build/html/" "${docroot}/"
  
 pushd "${docroot}"
+
+# mark the temp dir as a safe directory for git to operate in
+git config --global --add safe.directory "${docroot}" 
  
 # don't bother maintaining history; just generate fresh
 git init
