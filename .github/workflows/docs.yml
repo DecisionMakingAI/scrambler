@@ -50,3 +50,5 @@ jobs:
           branch: gh-pages
           force: true
           directory: ./docs/build/html
+          pre-push-command: git config --global --add safe.directory /github/workspace/docs/build/html
+
