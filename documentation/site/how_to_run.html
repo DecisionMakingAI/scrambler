@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/favicon.ico">
+  <title>How to Run / Duplicate the Project - Scrambler</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="extra.css" rel="stylesheet">
+  <script src="js/jquery-2.1.1.min.js" defer></script>
+  <script src="js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</head>
+
+<body class="wy-body-for-nav" role="document">
+  <div class="wy-grid-for-nav">
+    
+    <!-- Sidebar  -->
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="index.html" class="icon icon-home"> Scrambler</a>
+        <div role="search">
+          <form id="rtd-search-form" class="wy-form" action="./search.html" method="get">
+            <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+          </form>
+        </div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          <li class="toctree-l1"><a href="index.html">Introduction</a></li>
+          <li class="toctree-l1"><a href="initialsetup.html">Initial Setup</a></li>
+          <li class="toctree-l1"><a href="setup_jetson_nano.html">Software Installation</a></li>
+          <li class="toctree-l1"><a href="sd_card_backup.html">Software Backup</a></li>
+          <li class="toctree-l1 current"><a class="current" href="how_to_run.html">How to Run</a></li>
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <!-- Main content -->
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Scrambler</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+            <ul class="wy-breadcrumbs">
+              <li><a href="index.html">Docs</a> &raquo;</li>
+              <li>How to Run</li>
+            </ul>
+            <hr/>
+          </div>
+
+          <div role="main">
+            <div class="section">
+
+<h1 id="how-to-run">How to Run the Scrambler Project</h1>
+<p>This guide outlines every major step needed to reproduce the <strong>Scrambler DonkeyCar</strong> setup — from fresh Jetson Nano installation to model deployment</p>
+
+<hr>
+
+<h2 id="hardware-setup">1. Hardware Setup</h2>
+<ul>
+  <li>2× Jetson Nano (4 GB), Pi Cameras, Logitech F710 controllers, 64 GB microSD cards, RC chassis, and power banks.</li>
+  <li>Connect the CSI camera securely; ensure ribbon cable orientation (contacts facing down toward the board).</li>
+  <li>Test motor and servo wiring before power-on — reversed ESC or servo pins can cause startup errors.</li>
+</ul>
+
+<hr>
+
+<h2 id="software-installation">2. Software Installation</h2>
+<pre><code>sudo apt update && sudo apt upgrade
+sudo apt install python3-pip python3-venv git
+git clone https://github.com/autorope/donkeycar
+cd donkeycar
+python3 -m venv ~/venvs/dk
+source ~/venvs/dk/bin/activate
+pip install -e .
+pip install tensorflow==2.9.1 opencv-python
+</code></pre>
+<p>DonkeyCar v4.2.1 and OpenCV were confirmed stable on both Nanos.</p>
+
+<hr>
+
+<h2 id="finding-ssh">3. SSH Setup & Finding IPs</h2>
+<p>Use SSH for all remote control, data transfer, and debugging. If you don’t know the IP address of your Jetson:</p>
+<pre><code>hostname -I
+</code></pre>
+<p>This command returns the local IP(s). You can also find it with:</p>
+<pre><code>ifconfig wlan0
+</code></pre>
+<p>Then connect from your host PC:</p>
+<pre><code>ssh car1@10.x.x.x     # Password: donkey
+ssh car2@10.x.x.x     # Password: 123
+</code></pre>
+<p>To make SSH faster, create an entry in your <code>~/.ssh/config</code> file:</p>
+<pre><code>Host car1
+  HostName 10.x.x.x
+  User car1
+Host car2
+  HostName 10.x.x.x
+  User car2
+</code></pre>
+
+<hr>
+
+<h2 id="data-collection">4. Data Collection</h2>
+<pre><code>python manage.py drive
+</code></pre>
+<p>Enable throttle-based auto-recording in <code>myconfig.py</code>:</p>
+<pre><code>AUTO_RECORD_ON_THROTTLE = True
+</code></pre>
+<p>All frames and control values are automatically logged in <strong>Tub v2</strong> format. Data can be cleaned or trimmed before training:</p>
+<pre><code>donkey tubclean data
+donkey tubplot --model models/linear.h5
+</code></pre>
+<p><strong>Tip:</strong> Record short, distinct sessions (e.g., one behavior per run). Avoid long continuous drives — they’re harder to clean.</p>
+
+<hr>
+
+<h2 id="training">5. Training on PC</h2>
+<p>Move data to your local GPU machine and train using either TensorFlow or PyTorch:</p>
+<pre><code># TensorFlow baseline
+python train.py --tub data --model models/linear.h5
+
+# PyTorch behavior model
+python train_pytorch.py --tub data --model models/behavior.pt
+</code></pre>
+<p><strong>Why PyTorch?</strong> The team found it faster to iterate with GPU support and easier to modify for labeled behaviors.</p>
+<p>Once trained, export via ONNX or TorchScript if needed for the Jetson Nano 4GB memory constraint.</p>
+
+<hr>
+
+<h2 id="deployment">6. Deploying the Model</h2>
+<pre><code>scp models/behavior.pt car1:~/mycar/models/
+</code></pre>
+<p>Edit <code>myconfig.py</code> on the Jetson:</p>
+<pre><code>MODEL_PATH = "models/behavior.pt"
+</code></pre>
+<p>Then run the car in inference mode:</p>
+<pre><code>python manage.py drive --model models/behavior.pt
+</code></pre>
+<p>Optional: open <code>http://&lt;hostname&gt;.local:8887</code> in your browser for web control.</p>
+
+<hr>
+
+<h2 id="quick-notes">7. Quick Notes & Common Pitfalls</h2>
+<ul>
+  <li><strong>Camera not found?</strong> Ensure <code>sensor_id=0</code> and <code>sensor_mode=2</code> in <code>camera.py</code>.</li>
+  <li><strong>Wi-Fi unstable?</strong> Set a static IP or reconnect after each boot before launching drive mode.</li>
+  <li><strong>cv2 import errors?</strong> Fix with:
+<pre><code>ln -sf /usr/lib/python3.6/dist-packages/cv2.cpython-36m-aarch64-linux-gnu.so \
+       ~/venvs/dk/lib/python3.6/site-packages/
+</code></pre></li>
+  <li><strong>Low FPS?</strong> Keep resolution ≤ 240×240 at 30 FPS for stable streaming.</li>
+  <li><strong>Training hangs?</strong> Delete empty Tub folders or run <code>donkey tubclean</code> first.</li>
+  <li><strong>Throttle sensitivity:</strong> Calibrate via joystick mapping (F710 triggers) — misalignment affects labels.</li>
+  <li><strong>Jetson overheating:</strong> Use small USB fans or limit GPU frequency to <code>921MHz</code> for long sessions.</li>
+</ul>
+
+<hr>
+
+<h2 id="behavior-labeling">8. Behavior Labeling (Optional)</h2>
+<ul>
+  <li>Map joystick buttons (<code>A</code>, <code>B</code>, <code>Y</code>) to behavior states.</li>
+  <li>Record 2–3 short clips per behavior (turning, braking, straight).</li>
+  <li>Keep clips balanced to avoid overfitting one direction.</li>
+</ul>
+
+<hr>
+
+<h2 id="acknowledgments">9. Acknowledgments</h2>
+<p><em>Compiled by Abe Eldo, Kendall Foy, and Yu Wang for the Scrambler Capstone Project.</em></p>
+            </div>
+          </div>
+
+          <footer>
+            <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+              <a href="sd_card_backup.html" class="btn btn-neutral" title="Software Backup">
+                <span class="icon icon-circle-arrow-left"></span> Previous
+              </a>
+            </div>
+            <hr/>
+            Built with <a href="http://www.mkdocs.org">MkDocs</a> using the Read the Docs theme.
+          </footer>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      <span><a href="sd_card_backup.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+    </span>
+  </div>
+
+  <script>
+    var mkdocs_page_name = "How to Run / Duplicate the Project";
+    var mkdocs_page_input_path = "how_to_run.md";
+    var mkdocs_page_url = "how_to_run.html";
+  </script>
+  <script src="js/theme.js" defer></script>
+  <script src="search/main.js" defer></script>
+</body>
+</html>
