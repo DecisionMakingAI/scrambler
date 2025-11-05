@@ -1,11 +1,10 @@
-name: docs_pages_workflow 
+name: docs_pages_workflow
 
-on: 
+on:
   push:
-    branches: [ main ]   
+    branches: [ main ]
 
 jobs:
-
   build_docs_job:
     runs-on: ubuntu-latest
     env:
@@ -24,11 +23,16 @@ jobs:
           python -m pip install -U sphinx
           python -m pip install sphinx-rtd-theme
     
-      - name: make the sphinx docs
+      - name: Build the Sphinx docs
         run: |
           make -C docs clean
           make -C docs html
-              
+
+      # 👇 FIX: Mark the folder as safe before initializing git
+      - name: Mark docs directory as safe
+        run: |
+          git config --global --add safe.directory /github/workspace/docs/build/html
+
       - name: Init new repo in dist folder and commit
         run: |
           cd docs/build/html/
