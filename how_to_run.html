@@ -86,6 +86,52 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">How to Run</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-hardware-setup">1. Hardware Setup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-software-installation">2. Software Installation</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-ssh-setup-and-finding-ips">3. SSH Setup and Finding IPs</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#finding-your-jetson-ip-address">Finding Your Jetson IP Address</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#connecting-via-ssh">Connecting via SSH</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ssh-config-optional">SSH Config (Optional)</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-data-collection">4. Data Collection</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#auto-recording-configuration">Auto-Recording Configuration</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#data-cleaning">Data Cleaning</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-training-on-pc">5. Training on PC</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#tensorflow-baseline">TensorFlow Baseline</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#pytorch-behavior-model">PyTorch Behavior Model</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-deploying-the-model">6. Deploying the Model</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#transfer-model-to-jetson">Transfer Model to Jetson</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configure-model-path">Configure Model Path</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#run-inference-mode">Run Inference Mode</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-quick-notes-and-common-pitfalls">7. Quick Notes and Common Pitfalls</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-behavior-labeling-optional">8. Behavior Labeling (Optional)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9-acknowledgments">9. Acknowledgments</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -166,95 +212,161 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="how-to-run-or-duplicate-the-scrambler-project">How to Run or Duplicate the Scrambler Project</h1>
-<p>This guide outlines every major step needed to reproduce the Scrambler DonkeyCar Capstone setup from fresh Jetson Nano installation to model deployment, with extra notes from the original team’s experience to help future groups avoid common issues.</p>
-<ol>
-<li>Hardware Setup
-2× Jetson Nano (4 GB), Pi Cameras, Logitech F710 controllers, 64 GB microSD cards, RC chassis, and power banks.</li>
-</ol>
-<p>Connect the CSI camera securely and ensure ribbon cable orientation (contacts facing down toward the board).
-Test motor and servo wiring before power-on because reversed ESC or servo pins can cause startup errors.</p>
-<ol>
-<li>Software Installation</li>
-</ol>
-<p>sudo apt update &amp;&amp; sudo apt upgrade
+<p>This guide outlines every major step needed to reproduce the Scrambler DonkeyCar Capstone setup from fresh Jetson Nano installation to model deployment, with extra notes from the original team's experience to help future groups avoid common issues.</p>
+<hr />
+<h2 id="1-hardware-setup">1. Hardware Setup</h2>
+<p><strong>Required components:</strong>
+- 2× Jetson Nano (4 GB)
+- Pi Cameras
+- Logitech F710 controllers
+- 64 GB microSD cards
+- RC chassis
+- Power banks</p>
+<p><strong>Setup instructions:</strong>
+- Connect the CSI camera securely and ensure ribbon cable orientation (contacts facing down toward the board)
+- Test motor and servo wiring before power-on because reversed ESC or servo pins can cause startup errors</p>
+<hr />
+<h2 id="2-software-installation">2. Software Installation</h2>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt upgrade
 sudo apt install python3-pip python3-venv git
+
 git clone https://github.com/autorope/donkeycar
 cd donkeycar
+
 python3 -m venv ~/venvs/dk
 source ~/venvs/dk/bin/activate
+
 pip install -e .
-pip install tensorflow==2.9.1 opencv-python</p>
-<p>DonkeyCar version 4.2.1 and OpenCV were confirmed stable on both Nanos.</p>
+pip install tensorflow==2.9.1 opencv-python
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> DonkeyCar version 4.2.1 and OpenCV were confirmed stable on both Nanos.</p>
+</blockquote>
+<hr />
+<h2 id="3-ssh-setup-and-finding-ips">3. SSH Setup and Finding IPs</h2>
+<p>Use SSH for all remote control, data transfer, and debugging.</p>
+<h3 id="finding-your-jetson-ip-address">Finding Your Jetson IP Address</h3>
+<p>If you don't know the IP address of your Jetson, run:</p>
+<pre><code class="language-bash">hostname -I
+</code></pre>
+<p>This command returns the local IPs. You can also find it with:</p>
+<pre><code class="language-bash">ifconfig wlan0
+</code></pre>
+<h3 id="connecting-via-ssh">Connecting via SSH</h3>
+<p>Then connect from your host PC:</p>
+<pre><code class="language-bash"># Car 1
+ssh car1@10.x.x.x
+# Password: donkey
+
+# Car 2
+ssh car2@10.x.x.x
+# Password: 123
+</code></pre>
+<h3 id="ssh-config-optional">SSH Config (Optional)</h3>
+<p>To make SSH faster, create an entry in your <code>~/.ssh/config</code> file:</p>
+<pre><code>Host car1
+    HostName 10.x.x.x
+    User car1
+
+Host car2
+    HostName 10.x.x.x
+    User car2
+</code></pre>
+<p>Then you can simply connect with: <code>ssh car1</code> or <code>ssh car2</code></p>
+<hr />
+<h2 id="4-data-collection">4. Data Collection</h2>
+<p>Start the drive mode:</p>
+<pre><code class="language-bash">python manage.py drive
+</code></pre>
+<h3 id="auto-recording-configuration">Auto-Recording Configuration</h3>
+<p>Enable throttle-based auto-recording in <code>myconfig.py</code>:</p>
+<pre><code class="language-python">AUTO_RECORD_ON_THROTTLE = True
+</code></pre>
+<p>All frames and control values are automatically logged in Tub v2 format.</p>
+<h3 id="data-cleaning">Data Cleaning</h3>
+<p>Data can be cleaned or trimmed before training:</p>
+<pre><code class="language-bash">donkey tubclean data
+donkey tubplot --model models/linear.h5
+</code></pre>
+<blockquote>
+<p><strong>Tip:</strong> Record short, distinct sessions (one behavior per run). Avoid long continuous drives because they are harder to clean.</p>
+</blockquote>
+<hr />
+<h2 id="5-training-on-pc">5. Training on PC</h2>
+<p>Move data to your local GPU machine and train using either TensorFlow or PyTorch.</p>
+<h3 id="tensorflow-baseline">TensorFlow Baseline</h3>
+<pre><code class="language-bash">python train.py --tub data --model models/linear.h5
+</code></pre>
+<h3 id="pytorch-behavior-model">PyTorch Behavior Model</h3>
+<pre><code class="language-bash">python train_pytorch.py --tub data --model models/behavior.pt
+</code></pre>
+<blockquote>
+<p><strong>Team Insight:</strong> The team found PyTorch faster to iterate with GPU support and easier to modify for labeled behaviors. Once trained, export via ONNX or TorchScript if needed for the Jetson Nano 4GB memory constraint.</p>
+</blockquote>
+<hr />
+<h2 id="6-deploying-the-model">6. Deploying the Model</h2>
+<h3 id="transfer-model-to-jetson">Transfer Model to Jetson</h3>
+<pre><code class="language-bash">scp models/behavior.pt car1:~/mycar/models/
+</code></pre>
+<h3 id="configure-model-path">Configure Model Path</h3>
+<p>Edit <code>myconfig.py</code> on the Jetson:</p>
+<pre><code class="language-python">MODEL_PATH = &quot;models/behavior.pt&quot;
+</code></pre>
+<h3 id="run-inference-mode">Run Inference Mode</h3>
+<pre><code class="language-bash">python manage.py drive --model models/behavior.pt
+</code></pre>
+<p><strong>Optional:</strong> Open <code>http://&lt;jetson-ip&gt;.local:8887</code> in your browser for web control.</p>
+<hr />
+<h2 id="7-quick-notes-and-common-pitfalls">7. Quick Notes and Common Pitfalls</h2>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Solution</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Camera not found</strong></td>
+<td>Ensure <code>sensor_id=0</code> and <code>sensor_mode=2</code> in <code>camera.py</code></td>
+</tr>
+<tr>
+<td><strong>Wi-Fi unstable</strong></td>
+<td>Set a static IP or reconnect after each boot before launching drive mode</td>
+</tr>
+<tr>
+<td><strong>cv2 import errors</strong></td>
+<td>Fix with <code>ln -sf /usr/lib/python3.6/dist-packages/cv2.cpython-36m-aarch64-linux-gnu.so ~/venvs/dk/lib/python3.6/site-packages/</code></td>
+</tr>
+<tr>
+<td><strong>Low FPS</strong></td>
+<td>Keep resolution 240×240 at 30 FPS for stable streaming</td>
+</tr>
+<tr>
+<td><strong>Training hangs</strong></td>
+<td>Delete empty Tub folders or run <code>donkey tubclean</code> first</td>
+</tr>
+<tr>
+<td><strong>Throttle sensitivity</strong></td>
+<td>Calibrate via joystick mapping (F710 triggers) because misalignment affects labels</td>
+</tr>
+<tr>
+<td><strong>Jetson overheating</strong></td>
+<td>Use small USB fans or limit GPU frequency to 921MHz for long sessions</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="8-behavior-labeling-optional">8. Behavior Labeling (Optional)</h2>
+<p>For advanced behavior-based training:</p>
 <ol>
-<li>SSH Setup and Finding IPs
-Use SSH for all remote control, data transfer, and debugging. If you don’t know the IP address of your Jetson, run:
-hostname -I
-This command returns the local IPs. You can also find it with:
-ifconfig wlan0</li>
+<li>Map joystick buttons (A, B, Y) to behavior states</li>
+<li>Record 2–3 short clips per behavior (turning, braking, straight)</li>
+<li>Keep clips balanced to avoid overfitting one direction</li>
 </ol>
-<p>Then connect from your host PC:
-ssh car1@10.x.x.x   <br />
-Password: donkey</p>
-<p>ssh car2@10.x.x.x   <br />
-Password: 123</p>
-<p>To make SSH faster, create an entry in your ~/.ssh/config file:
-Host car1
-  HostName 10.x.x.x
-  User car1</p>
-<p>Host car2
-  HostName 10.x.x.x
-  User car2</p>
-<ol>
-<li>Data Collection
-python manage.py drive</li>
-</ol>
-<p>Enable throttle-based auto-recording in myconfig.py:
-AUTO_RECORD_ON_THROTTLE = True</p>
-<p>All frames and control values are automatically logged in Tub v2 format. Data can be cleaned or trimmed before training:
-donkey tubclean data
-donkey tubplot --model models/linear.h5</p>
-<p>Tip: Record short, distinct sessions (one behavior per run). Avoid long continuous drives because they are harder to clean.</p>
-<ol>
-<li>Training on PC
-Move data to your local GPU machine and train using either TensorFlow or PyTorch.</li>
-</ol>
-<p>TensorFlow baseline:
-python train.py --tub data --model models/linear.h5</p>
-<p>PyTorch behavior model:
-python train_pytorch.py --tub data --model models/behavior.pt</p>
-<p>The team found PyTorch faster to iterate with GPU support and easier to modify for labeled behaviors. Once trained, export via ONNX or TorchScript if needed for the Jetson Nano 4GB memory constraint.</p>
-<ol>
-<li>Deploying the Model
-scp models/behavior.pt car1:~/mycar/models/</li>
-</ol>
-<p>Edit myconfig.py on the Jetson:
-MODEL_PATH = "models/behavior.pt"</p>
-<p>Then run the car in inference mode:
-python manage.py drive --model models/behavior.pt</p>
-<p>Optional: open http://<hostname>.local:8887 in your browser for web control.</p>
-<ol>
-<li>
-<p>Quick Notes and Common Pitfalls
-Camera not found: Ensure sensor_id=0 and sensor_mode=2 in camera.py.
-Wi-Fi unstable: Set a static IP or reconnect after each boot before launching drive mode.
-cv2 import errors: Fix with
-ln -sf /usr/lib/python3.6/dist-packages/cv2.cpython-36m-aarch64-linux-gnu.so ~/venvs/dk/lib/python3.6/site-packages/
-Low FPS: Keep resolution 240x240 at 30 FPS for stable streaming.
-Training hangs: Delete empty Tub folders or run donkey tubclean first.
-Throttle sensitivity: Calibrate via joystick mapping (F710 triggers) because misalignment affects labels.
-Jetson overheating: Use small USB fans or limit GPU frequency to 921MHz for long sessions.</p>
-</li>
-<li>
-<p>Behavior Labeling (Optional)
-Map joystick buttons (A, B, Y) to behavior states.
-Record 2–3 short clips per behavior (turning, braking, straight).
-Keep clips balanced to avoid overfitting one direction.</p>
-</li>
-<li>
-<p>Acknowledgments
-Compiled by Abe Eldo, Kendall Foy, and Yu Wang for the Scrambler Capstone Project.</p>
-</li>
-</ol>
+<hr />
+<h2 id="9-acknowledgments">9. Acknowledgments</h2>
+<p>Compiled by <strong>Abe Eldo</strong>, <strong>Kendall Foy</strong>, and <strong>Yu Wang</strong> for the Scrambler Capstone Project.</p>
               
             </div>
           </div><footer>
