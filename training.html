@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="img/favicon.ico" />
-    <title>Charging Batteries - Scrambler</title>
+    <title>Training the AI - Scrambler</title>
     <link rel="stylesheet" href="css/theme.css" />
     <link rel="stylesheet" href="css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Charging Batteries";
-        var mkdocs_page_input_path = "chargingbatteries.md";
+        var mkdocs_page_name = "Training the AI";
+        var mkdocs_page_input_path = "training.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -71,8 +71,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="powermonitor.html">Power Monitoring</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Charging Batteries</a>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="chargingbatteries.html">Charging Batteries</a>
                 </li>
               </ul>
               <ul>
@@ -87,8 +87,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="how_to_run.html">How to Run</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="training.html">Training the AI</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Training the AI</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#training-pipeline-structure">Training Pipeline Structure</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-myconfigpy">Configuration (myconfig.py)</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <p class="caption"><span class="caption-text">Hardware Assembly</span></p>
@@ -154,7 +162,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html" class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Charging Batteries</li>
+      <li class="breadcrumb-item active">Training the AI</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -163,23 +171,159 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <p>The charger is capable of charging both the 2S and 3S batteries.  There is a balancing port for each type.  Only one battery may be charged at a time.</p>
-<p>The charging leads on the batteries are rather short, so JST-XH extension cables are used to solve this problem.
-They provide one additional benefit, in that wear and tear happens on the extension cable and not the charger connector.</p>
-<p>To charge a battery, just lift the charging cable from the housing on the car and plug it into the appropriate extensin cable on the charger.
-The cable housing on the car is there to hold the cable in place so it can't fall down and get caught in the wheel.</p>
-<p>Charging Processor Battery:</p>
-<div style="text-align:center"><img src="img/ChargeComp.jpg" /></div>
-<p><br></p>
-<p>Charging Drive System Battery:</p>
-<div style="text-align:center"><img src="img/ChargeDrive.jpg" /></div>
-<p><br></p>
+                <h1 id="model-training-deployment-and-diagnostics-guide">Model Training, Deployment, and Diagnostics Guide</h1>
+<p><em>Authored by: </em><em>Kendall Foy</em><em> — Sprint 4 Contribution (Training Pipeline &amp; Diagnostics)</em><br />
+<em>Last Updated: November 2025</em></p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>This guide explains how to <strong>train</strong>, <strong>evaluate</strong>, <strong>visualize</strong>, and <strong>deploy</strong> deep learning models for the Scrambler autonomous car platform.</p>
+<p>The supervised learning pipeline uses <strong>PyTorch Lightning</strong> for robust training, <strong>DonkeyCar</strong> for data collection, and supports <strong>ONNX → TensorRT</strong> conversion for fast, optimized inference on the Jetson Nano.</p>
+<hr />
+<h2 id="training-pipeline-structure">Training Pipeline Structure</h2>
+<p>The training workflow is composed of interconnected modules:</p>
+<p>train_pytorch.py
+└── torch_train.py
+├── torch_utils.py
+│ └── ResNet18.py ← model definition
+└── torch_data.py ← data loading and preprocessing</p>
+<p>yaml
+Copy code</p>
+<p>Each file has a specific purpose:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong><code>myconfig.py</code></strong></td>
+<td>Defines hyperparameters and environment settings (batch size, epochs, learning rate, etc.)</td>
+</tr>
+<tr>
+<td><strong><code>torch_data.py</code></strong></td>
+<td>Loads and preprocesses Tub data into PyTorch datasets</td>
+</tr>
+<tr>
+<td><strong><code>ResNet18.py</code></strong></td>
+<td>Defines the ResNet18 CNN model used for steering/throttle prediction</td>
+</tr>
+<tr>
+<td><strong><code>torch_utils.py</code></strong></td>
+<td>Instantiates models by type and handles checkpoint loading</td>
+</tr>
+<tr>
+<td><strong><code>torch_train.py</code></strong></td>
+<td>Coordinates training using PyTorch Lightning</td>
+</tr>
+<tr>
+<td><strong><code>train_pytorch.py</code></strong></td>
+<td>Command-line entry point for running training</td>
+</tr>
+<tr>
+<td><strong><code>runcar.py</code></strong></td>
+<td>Executes real-time inference on the Jetson Nano (autopilot)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="configuration-myconfigpy">Configuration (<code>myconfig.py</code>)</h2>
+<p>All hyperparameters and options are centralized in <code>myconfig.py</code>.<br />
+Common parameters:</p>
+<p>```python
+MAX_EPOCHS = 30
+BATCH_SIZE = 64
+LEARNING_RATE = 1e-4
+DEFAULT_MODEL_TYPE = 'resnet18'
+PRINT_MODEL_SUMMARY = True
+<em>Tip: Start with smaller epoch counts and lower learning rates when training on limited datasets, then scale once the model converges smoothly.</em></p>
+<p>Training the Model
+To train a new model:</p>
+<p>bash
+Copy code
+python3 train_pytorch.py \
+  --tub data/tub_turns_v2 \
+  --model models/turns.ckpt \
+  --type resnet18
+This command:</p>
+<p>Loads the dataset from the specified tub(s)</p>
+<p>Initializes a ResNet18 model</p>
+<p>Trains using GPU if available</p>
+<p>Applies early stopping and checkpointing</p>
+<p>Saves the best-performing .ckpt file</p>
+<p>Generates diagnostic plots and metric summaries (see below)</p>
+<p><strong>Inside the Training Script (torch_train.py)</strong>
+torch_train.py handles model training, checkpointing, and diagnostics.
+Here’s the internal flow:</p>
+<p><strong><em>Model Initialization</em></strong>
+Uses get_model_by_type() to load the correct architecture and checkpoint if resuming.</p>
+<p><strong><em>Data Loading</em></strong>
+Loads DonkeyCar tub data via TorchTubDataModule, splitting into training/validation sets.</p>
+<p><strong><em>Training Configuration</em></strong>
+Uses PyTorch Lightning’s Trainer with automatic GPU detection.</p>
+<p><strong><em>Callbacks</em></strong></p>
+<p>ModelCheckpoint: Saves the best model based on validation loss.</p>
+<p>EarlyStopping: Stops training if validation loss stops improving.</p>
+<p><strong>Logging</strong>
+Optionally logs metrics to TensorBoard:</p>
+<p>bash
+Copy code
+tensorboard --logdir tb_logs
+Diagnostics
+After training, the script saves metrics to a CSV and generates a loss curve (loss_curve.png).</p>
+<p><strong>Training Diagnostics and Visualization</strong>
+After each training session, Scrambler automatically generates key artifacts for performance tracking:</p>
+<p><strong><em>File</em></strong>  <strong><em>Description</em></strong>
+training_metrics.csv    Summary of key training and validation metrics
+loss_curve.png  Graph showing training loss over epochs
+*.ckpt  Best model checkpoint for deployment</p>
+<p>Example directory:</p>
+<p>Copy code
+models/
+ ├── turns.ckpt
+ ├── training_metrics.csv
+ ├── loss_curve.png
+Sample console output:</p>
+<p>pgsql
+Copy code
+Epoch 14: val_loss=0.0234 (improved)
+Early stopping triggered at epoch 19
+Best Validation Loss: 0.0217
+Saved metrics summary to models/training_metrics.csv
+Saved training loss curve to models/loss_curve.png
+Use these artifacts to identify overfitting, unstable training, or poor convergence early in the process.</p>
+<p><strong>Deploying the Model (ONNX → TensorRT)</strong>
+Once the .ckpt model is ready, convert and deploy to the Jetson Nano for real-time inference.</p>
+<ol>
+<li>Export to ONNX
+bash
+Copy code
+python3 -m torch.onnx.export models/turns-best.ckpt models/turns.onnx</li>
+<li>Convert to TensorRT
+bash
+Copy code
+python3 export_tensorrt.py \
+  --onnx models/turns.onnx \
+  --out models/turns.engine</li>
+<li>Deploy and Run
+bash
+Copy code
+python3 runcar.py --tensorrt models/turns.engine
+TensorRT models achieve up to 3× faster inference on the Jetson Nano.</li>
+</ol>
+<p><strong>Troubleshooting</strong>
+Issue   Likely Cause    Fix
+CUDA not available  Jetson drivers missing  Reinstall JetPack with PyTorch support
+FileNotFoundError: tub  Dataset path incorrect  Check --tub path or config
+Model fails to load Checkpoint mismatch Ensure .ckpt file exists
+Model overfits  Small dataset or high LR    Collect more data or reduce LEARNING_RATE</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="powermonitor.html" class="btn btn-neutral float-left" title="Power Monitoring"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="headless_setup.html" class="btn btn-neutral float-right" title="Headless Setup">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="how_to_run.html" class="btn btn-neutral float-left" title="How to Run"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="hwassy/introduction.html" class="btn btn-neutral float-right" title="Introduction">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -202,10 +346,10 @@ The cable housing on the car is there to hold the cable in place so it can't fal
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="powermonitor.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="how_to_run.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="headless_setup.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="hwassy/introduction.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
