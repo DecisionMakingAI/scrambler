@@ -164,15 +164,15 @@
                 <h1 id="how-to-run-or-duplicate-the-scrambler-project">How to Run or Duplicate the Scrambler Project</h1>
 <p>This guide outlines every major step needed to reproduce the Scrambler DonkeyCar Capstone setup from fresh Jetson Nano installation to model deployment, with extra notes from the original team’s experience to help future groups avoid common issues.</p>
 <ol>
-<li>
-<p>Hardware Setup
-2× Jetson Nano (4 GB), Pi Cameras, Logitech F710 controllers, 64 GB microSD cards, RC chassis, and power banks.
-Connect the CSI camera securely and ensure ribbon cable orientation (contacts facing down toward the board).
+<li>Hardware Setup
+2× Jetson Nano (4 GB), Pi Cameras, Logitech F710 controllers, 64 GB microSD cards, RC chassis, and power banks.</li>
+</ol>
+<p>Connect the CSI camera securely and ensure ribbon cable orientation (contacts facing down toward the board).
 Test motor and servo wiring before power-on because reversed ESC or servo pins can cause startup errors.</p>
-</li>
-<li>
-<p>Software Installation
-sudo apt update &amp;&amp; sudo apt upgrade
+<ol>
+<li>Software Installation</li>
+</ol>
+<p>sudo apt update &amp;&amp; sudo apt upgrade
 sudo apt install python3-pip python3-venv git
 git clone https://github.com/autorope/donkeycar
 cd donkeycar
@@ -180,8 +180,6 @@ python3 -m venv ~/venvs/dk
 source ~/venvs/dk/bin/activate
 pip install -e .
 pip install tensorflow==2.9.1 opencv-python</p>
-</li>
-</ol>
 <p>DonkeyCar version 4.2.1 and OpenCV were confirmed stable on both Nanos.</p>
 <ol>
 <li>SSH Setup and Finding IPs
@@ -191,8 +189,10 @@ This command returns the local IPs. You can also find it with:
 ifconfig wlan0</li>
 </ol>
 <p>Then connect from your host PC:
-ssh car1@10.x.x.x     Password: donkey
-ssh car2@10.x.x.x     Password: 123</p>
+ssh car1@10.x.x.x   <br />
+Password: donkey</p>
+<p>ssh car2@10.x.x.x   <br />
+Password: 123</p>
 <p>To make SSH faster, create an entry in your ~/.ssh/config file:
 Host car1
   HostName 10.x.x.x
