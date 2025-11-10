@@ -90,12 +90,6 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Training the AI</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#training-pipeline-structure">Training Pipeline Structure</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#configuration-myconfigpy">Configuration (myconfig.py)</a>
-    </li>
     </ul>
                 </li>
               </ul>
@@ -171,10 +165,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="model-training-deployment-and-diagnostics-guide">Model Training, Deployment, and Diagnostics Guide</h1>
-<p><em>Authored by: </em><em>Kendall Foy</em><em> — Sprint 4 Contribution (Training Pipeline &amp; Diagnostics)</em><br />
-<em>Last Updated: November 2025</em></p>
-<hr />
+                <h2 id="model-training">Model Training</h2>
 <h2 id="overview">Overview</h2>
 <p>This guide explains how to <strong>train</strong>, <strong>evaluate</strong>, <strong>visualize</strong>, and <strong>deploy</strong> deep learning models for the Scrambler autonomous car platform.</p>
 <p>The supervised learning pipeline uses <strong>PyTorch Lightning</strong> for robust training, <strong>DonkeyCar</strong> for data collection, and supports <strong>ONNX → TensorRT</strong> conversion for fast, optimized inference on the Jetson Nano.</p>
