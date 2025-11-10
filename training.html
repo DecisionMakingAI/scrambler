@@ -90,6 +90,50 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Training the AI</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#training-pipeline-structure">Training Pipeline Structure</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#file-responsibilities">File Responsibilities</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#configuration-myconfigpy">Configuration (myconfig.py)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#training-the-model">Training the Model</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#inside-the-training-script-torch_trainpy">Inside the Training Script (torch_train.py)</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#1-model-initialization">1. Model Initialization</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#2-data-loading">2. Data Loading</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#3-training-configuration">3. Training Configuration</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#4-callbacks">4. Callbacks</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#5-logging">5. Logging</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#6-diagnostics">6. Diagnostics</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#training-diagnostics-and-visualization">Training Diagnostics and Visualization</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#deploying-the-model-onnx-tensorrt">Deploying the Model (ONNX → TensorRT)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-export-to-onnx">1. Export to ONNX</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-convert-to-tensorrt">2. Convert to TensorRT</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3-deploy-and-run">3. Deploy and Run</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#troubleshooting">Troubleshooting</a>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -165,21 +209,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="model-training">Model Training</h2>
+                <h1 id="model-training-guide">Model Training Guide</h1>
 <h2 id="overview">Overview</h2>
 <p>This guide explains how to <strong>train</strong>, <strong>evaluate</strong>, <strong>visualize</strong>, and <strong>deploy</strong> deep learning models for the Scrambler autonomous car platform.</p>
 <p>The supervised learning pipeline uses <strong>PyTorch Lightning</strong> for robust training, <strong>DonkeyCar</strong> for data collection, and supports <strong>ONNX → TensorRT</strong> conversion for fast, optimized inference on the Jetson Nano.</p>
 <hr />
 <h2 id="training-pipeline-structure">Training Pipeline Structure</h2>
 <p>The training workflow is composed of interconnected modules:</p>
-<p>train_pytorch.py
+<pre><code>train_pytorch.py
 └── torch_train.py
-├── torch_utils.py
-│ └── ResNet18.py ← model definition
-└── torch_data.py ← data loading and preprocessing</p>
-<p>yaml
-Copy code</p>
-<p>Each file has a specific purpose:</p>
+    ├── torch_utils.py
+    │   └── ResNet18.py ← model definition
+    └── torch_data.py ← data loading and preprocessing
+</code></pre>
+<h3 id="file-responsibilities">File Responsibilities</h3>
 <table>
 <thead>
 <tr>
@@ -189,126 +232,171 @@ Copy code</p>
 </thead>
 <tbody>
 <tr>
-<td><strong><code>myconfig.py</code></strong></td>
+<td><code>myconfig.py</code></td>
 <td>Defines hyperparameters and environment settings (batch size, epochs, learning rate, etc.)</td>
 </tr>
 <tr>
-<td><strong><code>torch_data.py</code></strong></td>
+<td><code>torch_data.py</code></td>
 <td>Loads and preprocesses Tub data into PyTorch datasets</td>
 </tr>
 <tr>
-<td><strong><code>ResNet18.py</code></strong></td>
+<td><code>ResNet18.py</code></td>
 <td>Defines the ResNet18 CNN model used for steering/throttle prediction</td>
 </tr>
 <tr>
-<td><strong><code>torch_utils.py</code></strong></td>
+<td><code>torch_utils.py</code></td>
 <td>Instantiates models by type and handles checkpoint loading</td>
 </tr>
 <tr>
-<td><strong><code>torch_train.py</code></strong></td>
+<td><code>torch_train.py</code></td>
 <td>Coordinates training using PyTorch Lightning</td>
 </tr>
 <tr>
-<td><strong><code>train_pytorch.py</code></strong></td>
+<td><code>train_pytorch.py</code></td>
 <td>Command-line entry point for running training</td>
 </tr>
 <tr>
-<td><strong><code>runcar.py</code></strong></td>
+<td><code>runcar.py</code></td>
 <td>Executes real-time inference on the Jetson Nano (autopilot)</td>
 </tr>
 </tbody>
 </table>
 <hr />
 <h2 id="configuration-myconfigpy">Configuration (<code>myconfig.py</code>)</h2>
-<p>All hyperparameters and options are centralized in <code>myconfig.py</code>.<br />
-Common parameters:</p>
-<p>```python
-MAX_EPOCHS = 30
+<p>All hyperparameters and options are centralized in <code>myconfig.py</code>.</p>
+<p><strong>Common parameters:</strong></p>
+<pre><code class="language-python">MAX_EPOCHS = 30
 BATCH_SIZE = 64
 LEARNING_RATE = 1e-4
 DEFAULT_MODEL_TYPE = 'resnet18'
 PRINT_MODEL_SUMMARY = True
-<em>Tip: Start with smaller epoch counts and lower learning rates when training on limited datasets, then scale once the model converges smoothly.</em></p>
-<p>Training the Model
-To train a new model:</p>
-<p>bash
-Copy code
-python3 train_pytorch.py \
+</code></pre>
+<blockquote>
+<p><strong>Tip:</strong> Start with smaller epoch counts and lower learning rates when training on limited datasets, then scale once the model converges smoothly.</p>
+</blockquote>
+<hr />
+<h2 id="training-the-model">Training the Model</h2>
+<p>To train a new model:</p>
+<pre><code class="language-bash">python3 train_pytorch.py \
   --tub data/tub_turns_v2 \
   --model models/turns.ckpt \
   --type resnet18
-This command:</p>
-<p>Loads the dataset from the specified tub(s)</p>
-<p>Initializes a ResNet18 model</p>
-<p>Trains using GPU if available</p>
-<p>Applies early stopping and checkpointing</p>
-<p>Saves the best-performing .ckpt file</p>
-<p>Generates diagnostic plots and metric summaries (see below)</p>
-<p><strong>Inside the Training Script (torch_train.py)</strong>
-torch_train.py handles model training, checkpointing, and diagnostics.
-Here’s the internal flow:</p>
-<p><strong><em>Model Initialization</em></strong>
-Uses get_model_by_type() to load the correct architecture and checkpoint if resuming.</p>
-<p><strong><em>Data Loading</em></strong>
-Loads DonkeyCar tub data via TorchTubDataModule, splitting into training/validation sets.</p>
-<p><strong><em>Training Configuration</em></strong>
-Uses PyTorch Lightning’s Trainer with automatic GPU detection.</p>
-<p><strong><em>Callbacks</em></strong></p>
-<p>ModelCheckpoint: Saves the best model based on validation loss.</p>
-<p>EarlyStopping: Stops training if validation loss stops improving.</p>
-<p><strong>Logging</strong>
-Optionally logs metrics to TensorBoard:</p>
-<p>bash
-Copy code
-tensorboard --logdir tb_logs
-Diagnostics
-After training, the script saves metrics to a CSV and generates a loss curve (loss_curve.png).</p>
-<p><strong>Training Diagnostics and Visualization</strong>
-After each training session, Scrambler automatically generates key artifacts for performance tracking:</p>
-<p><strong><em>File</em></strong>  <strong><em>Description</em></strong>
-training_metrics.csv    Summary of key training and validation metrics
-loss_curve.png  Graph showing training loss over epochs
-*.ckpt  Best model checkpoint for deployment</p>
-<p>Example directory:</p>
-<p>Copy code
-models/
+</code></pre>
+<p><strong>This command:</strong>
+- Loads the dataset from the specified tub(s)
+- Initializes a ResNet18 model
+- Trains using GPU if available
+- Applies early stopping and checkpointing
+- Saves the best-performing <code>.ckpt</code> file
+- Generates diagnostic plots and metric summaries</p>
+<h3 id="inside-the-training-script-torch_trainpy">Inside the Training Script (<code>torch_train.py</code>)</h3>
+<p>The <code>torch_train.py</code> script handles model training, checkpointing, and diagnostics with the following flow:</p>
+<h4 id="1-model-initialization">1. Model Initialization</h4>
+<p>Uses <code>get_model_by_type()</code> to load the correct architecture and checkpoint if resuming.</p>
+<h4 id="2-data-loading">2. Data Loading</h4>
+<p>Loads DonkeyCar tub data via <code>TorchTubDataModule</code>, splitting into training/validation sets.</p>
+<h4 id="3-training-configuration">3. Training Configuration</h4>
+<p>Uses PyTorch Lightning's <code>Trainer</code> with automatic GPU detection.</p>
+<h4 id="4-callbacks">4. Callbacks</h4>
+<ul>
+<li><strong>ModelCheckpoint:</strong> Saves the best model based on validation loss</li>
+<li><strong>EarlyStopping:</strong> Stops training if validation loss stops improving</li>
+</ul>
+<h4 id="5-logging">5. Logging</h4>
+<p>Optionally logs metrics to TensorBoard:</p>
+<pre><code class="language-bash">tensorboard --logdir tb_logs
+</code></pre>
+<h4 id="6-diagnostics">6. Diagnostics</h4>
+<p>After training, the script saves metrics to a CSV and generates a loss curve (<code>loss_curve.png</code>).</p>
+<hr />
+<h2 id="training-diagnostics-and-visualization">Training Diagnostics and Visualization</h2>
+<p>After each training session, Scrambler automatically generates key artifacts for performance tracking:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>training_metrics.csv</code></td>
+<td>Summary of key training and validation metrics</td>
+</tr>
+<tr>
+<td><code>loss_curve.png</code></td>
+<td>Graph showing training loss over epochs</td>
+</tr>
+<tr>
+<td><code>*.ckpt</code></td>
+<td>Best model checkpoint for deployment</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example directory structure:</strong></p>
+<pre><code>models/
  ├── turns.ckpt
  ├── training_metrics.csv
- ├── loss_curve.png
-Sample console output:</p>
-<p>pgsql
-Copy code
-Epoch 14: val_loss=0.0234 (improved)
+ └── loss_curve.png
+</code></pre>
+<p><strong>Sample console output:</strong></p>
+<pre><code>Epoch 14: val_loss=0.0234 (improved)
 Early stopping triggered at epoch 19
 Best Validation Loss: 0.0217
 Saved metrics summary to models/training_metrics.csv
 Saved training loss curve to models/loss_curve.png
-Use these artifacts to identify overfitting, unstable training, or poor convergence early in the process.</p>
-<p><strong>Deploying the Model (ONNX → TensorRT)</strong>
-Once the .ckpt model is ready, convert and deploy to the Jetson Nano for real-time inference.</p>
-<ol>
-<li>Export to ONNX
-bash
-Copy code
-python3 -m torch.onnx.export models/turns-best.ckpt models/turns.onnx</li>
-<li>Convert to TensorRT
-bash
-Copy code
-python3 export_tensorrt.py \
+</code></pre>
+<p>Use these artifacts to identify overfitting, unstable training, or poor convergence early in the process.</p>
+<hr />
+<h2 id="deploying-the-model-onnx-tensorrt">Deploying the Model (ONNX → TensorRT)</h2>
+<p>Once the <code>.ckpt</code> model is ready, convert and deploy to the Jetson Nano for real-time inference.</p>
+<h3 id="1-export-to-onnx">1. Export to ONNX</h3>
+<pre><code class="language-bash">python3 -m torch.onnx.export models/turns-best.ckpt models/turns.onnx
+</code></pre>
+<h3 id="2-convert-to-tensorrt">2. Convert to TensorRT</h3>
+<pre><code class="language-bash">python3 export_tensorrt.py \
   --onnx models/turns.onnx \
-  --out models/turns.engine</li>
-<li>Deploy and Run
-bash
-Copy code
-python3 runcar.py --tensorrt models/turns.engine
-TensorRT models achieve up to 3× faster inference on the Jetson Nano.</li>
-</ol>
-<p><strong>Troubleshooting</strong>
-Issue   Likely Cause    Fix
-CUDA not available  Jetson drivers missing  Reinstall JetPack with PyTorch support
-FileNotFoundError: tub  Dataset path incorrect  Check --tub path or config
-Model fails to load Checkpoint mismatch Ensure .ckpt file exists
-Model overfits  Small dataset or high LR    Collect more data or reduce LEARNING_RATE</p>
+  --out models/turns.engine
+</code></pre>
+<h3 id="3-deploy-and-run">3. Deploy and Run</h3>
+<pre><code class="language-bash">python3 runcar.py --tensorrt models/turns.engine
+</code></pre>
+<blockquote>
+<p><strong>Performance Note:</strong> TensorRT models achieve up to 3× faster inference on the Jetson Nano.</p>
+</blockquote>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>Likely Cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CUDA not available</td>
+<td>Jetson drivers missing</td>
+<td>Reinstall JetPack with PyTorch support</td>
+</tr>
+<tr>
+<td>FileNotFoundError: tub</td>
+<td>Dataset path incorrect</td>
+<td>Check <code>--tub</code> path or config</td>
+</tr>
+<tr>
+<td>Model fails to load</td>
+<td>Checkpoint mismatch</td>
+<td>Ensure <code>.ckpt</code> file exists</td>
+</tr>
+<tr>
+<td>Model overfits</td>
+<td>Small dataset or high LR</td>
+<td>Collect more data or reduce <code>LEARNING_RATE</code></td>
+</tr>
+</tbody>
+</table>
               
             </div>
           </div><footer>
