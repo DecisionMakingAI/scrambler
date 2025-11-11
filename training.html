@@ -120,8 +120,6 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#training-diagnostics-and-visualization">Training Diagnostics and Visualization</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#deploying-the-model-onnx-tensorrt">Deploying the Model (ONNX → TensorRT)</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#1-export-to-onnx">1. Export to ONNX</a>
@@ -309,44 +307,39 @@ PRINT_MODEL_SUMMARY = True
 <h4 id="6-diagnostics">6. Diagnostics</h4>
 <p>After training, the script saves metrics to a CSV and generates a loss curve (<code>loss_curve.png</code>).</p>
 <hr />
-<h2 id="training-diagnostics-and-visualization">Training Diagnostics and Visualization</h2>
-<p>After each training session, Scrambler automatically generates key artifacts for performance tracking:</p>
-<table>
-<thead>
-<tr>
-<th>File</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>training_metrics.csv</code></td>
-<td>Summary of key training and validation metrics</td>
-</tr>
-<tr>
-<td><code>loss_curve.png</code></td>
-<td>Graph showing training loss over epochs</td>
-</tr>
-<tr>
-<td><code>*.ckpt</code></td>
-<td>Best model checkpoint for deployment</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Example directory structure:</strong></p>
+<!-- ## Training Diagnostics and Visualization
+
+After each training session, Scrambler generates key artifacts for performance tracking:
+
+| File | Description |
+|------|-------------|
+| `training_metrics.csv` | Summary of key training and validation metrics |
+| `loss_curve.png` | Graph showing training loss over epochs |
+| `*.ckpt` | Best model checkpoint for deployment |
+
+**Example directory structure:**
+
+
 <pre><code>models/
  ├── turns.ckpt
  ├── training_metrics.csv
  └── loss_curve.png
 </code></pre>
-<p><strong>Sample console output:</strong></p>
+
+
+**Sample console output:**
+
+
 <pre><code>Epoch 14: val_loss=0.0234 (improved)
 Early stopping triggered at epoch 19
 Best Validation Loss: 0.0217
 Saved metrics summary to models/training_metrics.csv
 Saved training loss curve to models/loss_curve.png
 </code></pre>
-<p>Use these artifacts to identify overfitting, unstable training, or poor convergence early in the process.</p>
+
+
+Use these artifacts to identify overfitting, unstable training, or poor convergence early in the process. -->
+
 <hr />
 <h2 id="deploying-the-model-onnx-tensorrt">Deploying the Model (ONNX → TensorRT)</h2>
 <p>Once the <code>.ckpt</code> model is ready, convert and deploy to the Jetson Nano for real-time inference.</p>
