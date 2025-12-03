@@ -1,7 +1,7 @@
 # Model Training Guide
 
 <video width="640" height="360" controls>
-  <source src="/assets/videos/demo.mp4" type="video/mp4">
+  <source src="/assets/videos/demo.mov" type="video/quicktime">
   Your browser doesn't support the video tag.
 </video>
 
