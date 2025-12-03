@@ -267,9 +267,9 @@ TensorRT provides significant inference speedup on the Jetson Nano (up to 3× fa
 ### Jetson Nano Hardware Note
 
 The Jetson Nano supports:
-- ✅ **FP16** (half precision)
-- ✅ **FP32** (full precision)
-- ❌ **INT8** acceleration is **not supported**
+-  **FP16** (half precision)
+-  **FP32** (full precision)
+-  **INT8** acceleration is **not supported**
 
 ### Step 1: Export to ONNX (on Host PC)
 

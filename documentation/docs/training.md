@@ -145,7 +145,7 @@ The PyTorch model registry currently includes:
 - **resnet18:** Single frame steering + throttle regression
 - **resnet18_temporal:** Multi-frame temporal model for sequential processing
 
-### ⚠️ Behavioral Models Warning
+### Behavioral Models Warning
 
 **Behavioral model support is disabled in the current PyTorch stack.**
 
@@ -255,8 +255,8 @@ The `convert_to_tensorrt.py` script:
 - Optimizes specifically for the Jetson Nano GPU
 
 **Jetson Nano Hardware Note:**
-- ✅ Supports **FP16** and **FP32** in TensorRT
-- ❌ **INT8** acceleration is **not supported**
+-  Supports **FP16** and **FP32** in TensorRT
+-  **INT8** acceleration is **not supported**
 
 #### Step 3: Configure and Run
 
