@@ -481,9 +481,9 @@ USE_TENSORRT = False  # Set to True if using TensorRT
 <p>TensorRT provides significant inference speedup on the Jetson Nano (up to 3× faster).</p>
 <h3 id="jetson-nano-hardware-note">Jetson Nano Hardware Note</h3>
 <p>The Jetson Nano supports:
-- ✅ <strong>FP16</strong> (half precision)
-- ✅ <strong>FP32</strong> (full precision)
-- ❌ <strong>INT8</strong> acceleration is <strong>not supported</strong></p>
+-  <strong>FP16</strong> (half precision)
+-  <strong>FP32</strong> (full precision)
+-  <strong>INT8</strong> acceleration is <strong>not supported</strong></p>
 <h3 id="step-1-export-to-onnx-on-host-pc">Step 1: Export to ONNX (on Host PC)</h3>
 <pre><code class="language-bash">python trt_tools/export_to_onnx.py \
   --model models/mypilot.ckpt \
