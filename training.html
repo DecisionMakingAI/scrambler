@@ -130,7 +130,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#supported-model-types">Supported Model Types</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#behavioral-models-warning">⚠️ Behavioral Models Warning</a>
+    <li class="toctree-l3"><a class="reference internal" href="#behavioral-models-warning">Behavioral Models Warning</a>
     </li>
         </ul>
     </li>
@@ -461,7 +461,7 @@ register_pytorch_model('my_model', create_my_model)
 <li><strong>resnet18:</strong> Single frame steering + throttle regression</li>
 <li><strong>resnet18_temporal:</strong> Multi-frame temporal model for sequential processing</li>
 </ul>
-<h3 id="behavioral-models-warning">⚠️ Behavioral Models Warning</h3>
+<h3 id="behavioral-models-warning">Behavioral Models Warning</h3>
 <p><strong>Behavioral model support is disabled in the current PyTorch stack.</strong></p>
 <p>Setting <code>TRAIN_BEHAVIORS = True</code> will raise a runtime error in PyTorch utilities and the data loader.</p>
 <p>If you need behavioral models in the future:
@@ -535,8 +535,8 @@ python trt_tools/convert_to_tensorrt.py \
 - Converts the ONNX model to a <code>.trt</code> engine
 - Optimizes specifically for the Jetson Nano GPU</p>
 <p><strong>Jetson Nano Hardware Note:</strong>
-- ✅ Supports <strong>FP16</strong> and <strong>FP32</strong> in TensorRT
-- ❌ <strong>INT8</strong> acceleration is <strong>not supported</strong></p>
+-  Supports <strong>FP16</strong> and <strong>FP32</strong> in TensorRT
+-  <strong>INT8</strong> acceleration is <strong>not supported</strong></p>
 <h4 id="step-3-configure-and-run">Step 3: Configure and Run</h4>
 <p>Update <code>myconfig.py</code> on the Jetson:</p>
 <pre><code class="language-python">USE_TENSORRT = True
