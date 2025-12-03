@@ -1,5 +1,10 @@
 # Model Training Guide
 
+<video width="640" height="360" controls>
+  <source src="/assets/videos/demo.mp4" type="video/mp4">
+  Your browser doesn't support the video tag.
+</video>
+
 ## Overview
 
 This guide explains how to **train**, **evaluate**, **visualize**, and **deploy** deep learning models for the Scrambler autonomous car platform.

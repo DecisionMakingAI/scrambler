@@ -1,10 +1,6 @@
 <div style="text-align:center"><img src="../img/car_left.jpg" /></div>
 <br>
 
-<iframe src="https://drive.google.com/file/d/FILE_ID/preview" 
-  width="640" height="480" allow="autoplay">
-</iframe>
-
 The principle goal of this project was to enhance the donkey car so that more useful and productive time can be obtained while the car and processor are operating fully off batteries.
 
 To hold the necessary electronics three layers of printed materials form a sandwich that is mounted to the chassis.
